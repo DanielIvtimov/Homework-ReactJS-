@@ -4,12 +4,20 @@ interface ThemeContextProps {
     theme: string;
     toggleTheme: () => void;
     buttonLook: string;
+    ourStyles: {
+        backgroundColor: string,
+        color: string,
+    }
 }
 
 const contextThemeDefaultValue: ThemeContextProps = {
     theme: "",
     toggleTheme: () => {},
     buttonLook: "",
+    ourStyles: {
+        backgroundColor: "",
+        color: ""
+    },
 };
 
 interface ContextThemeChildrenProps {
@@ -24,8 +32,11 @@ export const ThemeContextProvider = ({children}: ContextThemeChildrenProps) => {
         setTheme(currentTheme => (currentTheme === 'LIGHT' ? 'DARK' : 'LIGHT')); // Primerot od casot :D
     }; 
     const buttonLook = theme === 'DARK' ? 'LIGHT' : 'DARK'; // Primerot od casot :D 
+
+    const ourStyles = theme === 'DARK' ? { backgroundColor: 'black', color: 'pink'} : { backgroundColor: 'blue', color: 'white'}
+
     return (
-        <ThemeContext.Provider value={{theme, toggleTheme, buttonLook,}}>
+        <ThemeContext.Provider value={{theme, toggleTheme, buttonLook, ourStyles}}>
             {children}
         </ThemeContext.Provider>
     )
