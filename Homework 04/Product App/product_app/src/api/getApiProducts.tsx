@@ -1,7 +1,7 @@
 export const fetchProducts = async () => {
     try{
-        console.log("Fetching products:") // Gi pregleduvam site produkti od samoto api sto se vo niza 
         const response = await fetch("https://fakestoreapi.com/products") 
+        console.log("Fetching products:") // Gi pregleduvam site produkti od samoto api sto se vo niza 
         if(!response){
         console.log("Could not get products");
         }
