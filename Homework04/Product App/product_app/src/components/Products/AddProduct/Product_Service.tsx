@@ -10,7 +10,7 @@ export const CreateProduct = async (productData: Product) => {
             body: JSON.stringify(productData)
         });
         const data = await response.json();
-        console.log('Product is created:', data)
+        console.log('Product is created:', data) // dobivam poraka ako produktot uspesno e kreiran 
         return data;
     }catch(error){
         console.log("Error", error);

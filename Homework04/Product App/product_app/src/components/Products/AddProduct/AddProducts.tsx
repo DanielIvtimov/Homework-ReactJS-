@@ -4,8 +4,11 @@ import { CreateProduct } from "./Product_Service";
 import "./AddProductStyles.css"
 import { fetchProducts } from "../../../api/getApiProducts";
 
+interface AddProductProps {
+    handleAddProduct: (product: Product) => void;
+}
 
-export const AddProduct = () => {
+export const AddProduct = ({handleAddProduct}: AddProductProps) => {
     const [product, setProduct] = useState<Product>({
         category: "",
         description: "",
@@ -15,7 +18,6 @@ export const AddProduct = () => {
         price: 0,
     });
 
-    const [saveCreatedProducts, setSaveCreatedProducts] = useState<Product[]>([]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, key: string) => {
         const value = event.target.value; 
@@ -29,13 +31,20 @@ export const AddProduct = () => {
         event.preventDefault();
         console.log(product);
         const newProduct = await CreateProduct(product);
-        setSaveCreatedProducts([...saveCreatedProducts, newProduct])
-        console.log("Product is craeted:", newProduct);
-
-        const showNewCraetedProduct = await fetchProducts();
-        setProduct(showNewCraetedProduct)
+        handleAddProduct(newProduct);
+        console.log("Product is craeted:", newProduct);   
+        const clearningInputsValue: Product = {
+            category: "",
+            description: "",
+            id: 0,
+            image: "",
+            title: "",
+            price: 0,
+        }
+        setProduct(clearningInputsValue); // Ja cistam vrednosta na inputs posle uspesno kreiran nov produkt         
     }
 
+   
     return (
         <div className="add-product-container">
             <h2 className="add-product-heading">Add Product</h2>
